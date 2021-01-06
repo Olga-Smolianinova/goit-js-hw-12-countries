@@ -42,8 +42,11 @@ function fetchCountries(searchQuery) {
   return fetch(url)
     .then(response => {
       // console.log(response.status);
+      // throw new Error('Error fetching data');
+      // return response.json();
 
       if (response.status !== 200) {
+        throw new Error('Error fetching data'); //прописываем для того чтобы лучше отловить ошибки. В этом случае, если ответ хоть немного не 200, тогда ошибка ловится в catch
         return;
       } else {
         return response.json();
@@ -60,7 +63,7 @@ function fetchCountries(searchQuery) {
       else if (data.length >= 2 && data.length <= 10) {
         updateListOfCountries(data);
       } else {
-        // подставляем полученные данные в подготовленный шаблон для отображения одного элемента с помощью функции updateOneContry
+        // подставляем полученные данные в подготовленный шаблон для отображения одного элемента с помощью функции updateOneCountry
         updateOneCountry(data);
         // console.log(data);
         // console.log(data.length);
